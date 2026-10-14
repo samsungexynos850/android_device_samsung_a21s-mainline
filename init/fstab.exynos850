@@ -1,0 +1,31 @@
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# Boot
+/dev/block/by-name/boot /boot emmc defaults defaults
+
+# Cache
+/dev/block/by-name/cache /cache ext4 nodev,noatime,nosuid,discard check,formattable
+
+# Metadata
+/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic wait,first_stage_mount,formattable,check
+
+# Misc
+/dev/block/by-name/misc /misc emmc defaults defaults
+
+# Recovery
+/dev/block/by-name/recovery /recovery emmc defaults defaults
+
+# Super
+odm /odm ext4 noatime,ro wait,logical,first_stage_mount
+product /product ext4 noatime,ro wait,logical,first_stage_mount
+system /system ext4 noatime,ro wait,logical,first_stage_mount
+system_dlkm /system_dlkm ext4 noatime,ro wait,logical,first_stage_mount
+system_ext /system_ext ext4 noatime,ro wait,logical,first_stage_mount
+vendor /vendor ext4 noatime,ro wait,logical,first_stage_mount
+vendor_dlkm /vendor_dlkm ext4 noatime,ro wait,logical,first_stage_mount
+
+# Userdata
+/dev/block/by-name/userdata /data f2fs nodev,noatime,nosuid,discard,reserve_root=32768 latemount,check,quota,formattable

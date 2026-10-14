@@ -1,0 +1,100 @@
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+
+DEVICE_PATH := device/samsung/a21s_mainline
+
+# Inherit from mainline/common
+include device/mainline/common/BoardConfigMainlineCommon.mk
+
+# A/B
+AB_OTA_UPDATER := false
+
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_VARIANT := generic
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := generic
+
+# Boot
+BOARD_MKBOOTIMG_ARGS := --base 0x10000000
+BOARD_MKBOOTIMG_ARGS += --dtb_offset 0x00000000
+BOARD_MKBOOTIMG_ARGS += --header_version 2
+BOARD_MKBOOTIMG_ARGS += --kernel_offset 0x00008000
+BOARD_MKBOOTIMG_ARGS += --pagesize 2048
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset 0x01000000
+BOARD_MKBOOTIMG_ARGS += --tags_offset 0x00000100
+
+# DTB
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+
+# Dynamic Partitions
+BOARD_SUPER_PARTITION_GROUPS := samsung_dynamic_partitions
+BOARD_SUPER_PARTITION_SIZE := 5557452800
+BOARD_SAMSUNG_DYNAMIC_PARTITIONS_SIZE := 5556404224
+BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := \
+    odm \
+    product \
+    system \
+    system_dlkm \
+    system_ext \
+    vendor \
+    vendor_dlkm
+
+-include vendor/lineage/config/BoardConfigReservedSize.mk
+
+# Filesystem
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_ODM := odm
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
+TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USERIMAGES_USE_EXT4 := true
+
+# Kernel
+BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_PAGESIZE := 2048
+TARGET_KERNEL_SOURCE := kernel/samsung/mainline
+TARGET_KERNEL_CONFIG := \
+    defconfig \
+    fragments/exynos850-a217f.config
+
+# Metadata
+BOARD_USES_METADATA_PARTITION := true
+
+# OTA
+TARGET_OTA_ASSERT_DEVICE := a21s_mainline
+
+# Partitions
+BOARD_BOOTIMAGE_PARTITION_SIZE := 37748736
+BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 55574528
+BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+
+# Platform
+TARGET_BOARD_PLATFORM := exynos850
+
+# Recovery
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/init/fstab.exynos850
+TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
+
+# VINTF
+DEVICE_MANIFEST_FILE := \
+    $(DEVICE_PATH)/vintf/manifest.xml

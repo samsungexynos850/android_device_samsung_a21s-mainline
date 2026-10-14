@@ -1,0 +1,25 @@
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+
+import /vendor/etc/init/hw/init.mainline.rc
+
+# Block device symlinks
+on init
+    mkdir /dev/block/bootdevice
+    symlink /dev/block/by-name /dev/block/bootdevice/by-name
+    symlink /dev/mmcblk0rpmb /dev/block/mmcblk0rpmb
+
+# USB
+on early-init && property:sys.usb.controller=*
+    setprop vendor.usb.controller ${sys.usb.controller}
+
+# Mount
+on fs
+    # Mount everything that does not require fsck
+    mount_all --early
+
+on late-fs
+    # Mount RW partitions which need run fsck
+    mount_all --late

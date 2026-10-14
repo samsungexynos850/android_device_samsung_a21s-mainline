@@ -1,0 +1,8 @@
+#
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# /dev/block/bootdevice symlink
+on init
+    symlink /dev/block/platform/${ro.boot.boot_devices} /dev/block/bootdevice
