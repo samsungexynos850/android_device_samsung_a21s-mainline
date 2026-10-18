@@ -33,6 +33,7 @@ BOARD_MKBOOTIMG_ARGS += --ramdisk_offset 0x01000000
 BOARD_MKBOOTIMG_ARGS += --tags_offset 0x00000100
 
 # DTB
+BOARD_DTB_CFG := $(DEVICE_PATH)/kernel/exynos850.cfg
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 # Dynamic Partitions
@@ -61,6 +62,15 @@ TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_USERIMAGES_USE_EXT4 := true
+
+TARGET_KERNEL_CONFIG_EXT := \
+    kernel/mainline/configs/fragments/android-base-pre/common.config \
+    kernel/mainline/configs/fragments/android-base-pre/arm64.config \
+    kernel/mainline/configs/fragments/android-base-conditional/CONFIG_ARM64-y.config \
+    kernel/mainline/configs/fragments/common.config \
+    kernel/mainline/configs/fragments/n/disable-clang-hardening-features.config \
+    kernel/mainline/configs/fragments/n/faster-build-time.config \
+    kernel/configs/b/android-6.12/android-base.config
 
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image
