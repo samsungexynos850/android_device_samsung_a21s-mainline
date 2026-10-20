@@ -30,6 +30,10 @@ TARGET_GRAPHICS_ALLOCATOR_HAL := minigbm-upstream
 # Graphics composer
 TARGET_GRAPHICS_COMPOSER_HAL := drmfb-composer
 
+# HIDL
+PRODUCT_PACKAGES += \
+    vndservicemanager
+
 # Images
 PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 
@@ -40,6 +44,9 @@ PRODUCT_COPY_FILES += \
 
 # Kernel
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
+# Keyboard
+TARGET_ENABLE_FBKEYBOARD := true
 
 # Mesa
 TARGET_GRAPHICS := mesa
@@ -55,8 +62,8 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/init/init.recovery.mainline.exynos850.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.mainline.exynos850.rc
 
 # Shipping API level
-PRODUCT_SHIPPING_API_LEVEL := 29
+PRODUCT_SHIPPING_API_LEVEL := 33
 
 # Soong Namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(DEVICE_PATH)
